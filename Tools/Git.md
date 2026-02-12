@@ -157,6 +157,80 @@ git push
 
 > **注意**：gitee 暂未开通免费的 LFS，需要注册企业账号
 
+#### 相关命令
+
+##### 清理 Git 缓存
+
+```bash
+git filter-branch --force --index-filter 'git rm -rf --cached --ignore-unmatch XXX.pkl' --prune-empty --tag-name-filter cat -- --all
+```
+清理 git 缓存
+
+##### 增大本地缓存空间大小
+
+```bash
+git config --global http.postBuffer 7242880000
+```
+减小错误概率
+
+##### 查询 commit 历史
+
+```bash
+git reflog
+```
+查询 commit 历史，复制最前面的简写哈希码
+
+##### 回退到上传文件前
+
+```bash
+git reset <指定回退的commit的哈希码>
+```
+回退到 add 和 commit 大文件前，不然后面会显示有关 "ref" 的失败信息
+
+##### 追踪指定后缀的大文件
+
+```bash
+git lfs track "*.zip"
+```
+使用该命令让 git 的大文件管理跟踪指定后缀的大文件
+
+###### 查询追踪的文件
+
+```bash
+git lfs track
+```
+
+> **注意**：使用该命令后需再次 add 和 commit 才能生效
+
 ### 错误信息及解决办法
 
-（待补充）
+#### 无法连接 GitHub
+
+**错误信息：**
+```
+fatal: unable to access 'https://github.com/nobmaste/QH_Learning_Resources.git/': 
+Failed to connect to github.com port 443 after 21130 ms: Couldn't connect to server
+```
+
+**解决办法：** 直接取消代理
+
+```bash
+git config --global --unset http.proxy
+git config --global --unset https.proxy
+```
+
+#### 本地代理配置
+
+有的时候需要设置本地代理
+
+##### 查询全局配置情况
+
+```bash
+git config --global -l
+```
+
+##### 设置本地代理
+
+```bash
+git config --global http.proxy http://127.0.0.1:<查询设置里的代理服务器端口>
+```
