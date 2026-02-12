@@ -1,7 +1,7 @@
 <!-- docs/_sidebar.md -->
 
 - [首页](home)
-- [第一章 第一节](/ch1/c1)
-  - [第一章 第一节1.1](/ch1/ch1.1/c1.1)
-  - [第一章 第一节 1.2](/ch1/ch1.1/c1.2)
-- [第一章 第二节](/ch1/c2)
+- [ROS2]
+  - [Navigation2](/ROS2/Nav2)
+- [tool]
+  - [Git](/ch1/c2)
