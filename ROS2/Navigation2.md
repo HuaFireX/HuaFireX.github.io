@@ -224,7 +224,7 @@ Nav2 支持多种规划器、控制器和行为树插件，可根据需求配置
 
 - 两轮差速控制插件示例：
 
-![fishbot 控制示意图](./img/fishbot_control.png)
+![fishbot 控制示意图](./img/屏幕截图%202026-02-09%20145539.png)
 
 - 键盘控制：
 
@@ -235,7 +235,7 @@ ros2 run teleop_twist_keyboard teleop_twist_keyboard
 
 - 使用 `rqt` 显示速度（Plugin → Visualization → Plot）
 
-![rqt plot](./img/rqt_plot.png)
+![rqt plot](./img/屏幕截图%202026-02-09%20145549.png)
 
 ## 导航实战
 
