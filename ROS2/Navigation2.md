@@ -201,6 +201,7 @@ ros2 run tf2_ros static_transform_publisher 0 0 0 0 0 0 map odom
 
 **步骤 3：启动 Nav2 导航**
 ![alt text](<img/屏幕截图 2026-02-05 094221.png>)
+
 ```bash
 # 终端 3
 # 复制配置文件到 config 目录
@@ -411,7 +412,7 @@ ros2 topic list | grep map
 ```
 
 应输出类似：
-```
+```bash
 /map
 /map_metadata
 ```
