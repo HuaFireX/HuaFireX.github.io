@@ -224,7 +224,7 @@ Nav2 支持多种规划器、控制器和行为树插件，可根据需求配置
 
 - 两轮差速控制插件示例：
 
-![fishbot 控制示意图](https://api2.mubu.com/v3/document_image/22676279_2b1c38ee-a8da-4fc8-99fb-dc13f978cad3.png)
+![fishbot 控制示意图](./img/fishbot_control.png)
 
 - 键盘控制：
 
@@ -235,7 +235,7 @@ ros2 run teleop_twist_keyboard teleop_twist_keyboard
 
 - 使用 `rqt` 显示速度（Plugin → Visualization → Plot）
 
-![rqt plot](https://api2.mubu.com/v3/document_image/22676279_c8b5e53c-4241-4926-cfce-25d3e179f8b8.png)
+![rqt plot](./img/rqt_plot.png)
 
 ## 导航实战
 
