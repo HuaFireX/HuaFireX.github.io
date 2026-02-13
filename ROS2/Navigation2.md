@@ -1,7 +1,3 @@
----
-typora-copy-images-to: ./img
----
-
 # Navigation 2入门
 
 ## 安装与运行示例（以 ROS2 发行版 `humble` 为例）
@@ -14,7 +10,7 @@ sudo apt install ros-<ros2-distro>-nav2-bringup
 sudo apt install ros-<ros2-distro>-turtlebot3*
 ```
 
-> 以上命令中的 `<ros2-distro>` 请替换为你的发行版（例如 `humble`）。
+> 注意：以上命令中的 `<ros2-distro>` 请替换为你的发行版（例如 `humble`）。
 
 ### 运行示例
 
@@ -27,7 +23,7 @@ export LIBGL_ALWAYS_SOFTWARE=1
 ros2 launch nav2_bringup tb3_simulation_launch.py headless:=False
 ```
 
-注意：`headless` 默认是 `true`，如需使用 `gzclient` 请设置为 `False`（或 `headless:=False`）。
+> 注意：`headless` 默认是 `true`，如需使用 `gzclient` 请设置为 `False`（或 `headless:=False`）。
 
 ## 导航相关概念
 
@@ -45,19 +41,19 @@ ros2 launch nav2_bringup tb3_simulation_launch.py headless:=False
 gazebo --verbose -s libgazebo_ros_init.so -s libgazebo_ros_factory.so
 ```
 
-## 编写机器人
+### 编写机器人
 
-### 1. 设置转换TF2
+#### 1. 设置转换TF2
 
 TF2（Transform Framwork 2）用于管理机器人坐标系之间的变换关系。
 
-### 2. 创建功能包
+#### 2. 创建功能包
 
 ```bash
 ros2 pkg create --build-type ament_cmake sam_bot_description
 ```
 
-### 3. 编写 URDF（Unified Robot Description Format）
+#### 3. 编写 URDF（Unified Robot Description Format）
 
 URDF 是 ROS 中描述机器人结构、链接和关节的标准格式。
 
@@ -70,7 +66,7 @@ sudo apt install ros-<ros2-distro>-xacro
 
 **xacro**：允许在 URDF 中使用变量和宏，简化复杂的机器人描述。
 
-### 4. 编写 SDF（Simulation Description Format）
+#### 4. 编写 SDF（Simulation Description Format）
 
 SDF 是 Gazebo 仿真环境中使用的机器人/环境描述格式。
 
@@ -80,7 +76,7 @@ SDF 是 Gazebo 仿真环境中使用的机器人/环境描述格式。
 sudo apt install ros-<ros2-distro>-sdformat-urdf
 ```
 
-### 5. 设置里程计 - Odometry（Gazebo 仿真）
+#### 5. 设置里程计 - Odometry（Gazebo 仿真）
 
 **安装 3D 模拟器 Gazebo：**
 
@@ -88,7 +84,7 @@ sudo apt install ros-<ros2-distro>-sdformat-urdf
 sudo apt install ros-<ros2-distro>-ros-gz
 ```
 
-### 6. 实现里程平滑化 - 拓展卡尔曼滤波融合
+#### 6. 实现里程平滑化 - 拓展卡尔曼滤波融合
 
 使用 robot_localization 包融合多个传感器（里程计、IMU 等）以获得平滑的位姿估计。
 
@@ -102,7 +98,7 @@ sudo apt install ros-<ros2-distro>-robot-localization
 
 ekf.yaml 包含 EKF 节点的参数配置，定义输入话题、融合的传感器数据和噪声模型。
 
-### 7. 设置传感器 - Sensors（Gazebo 仿真）
+#### 7. 设置传感器 - Sensors（Gazebo 仿真）
 
 在 Gazebo 中配置机器人传感器：
 - **雷达（LiDAR）**：生成环境的点云数据
@@ -111,19 +107,19 @@ ekf.yaml 包含 EKF 节点的参数配置，定义输入话题、融合的传感
 ![alt text](<img/屏幕截图 2026-02-03 181816.png>)
 ![alt text](<img/屏幕截图 2026-02-03 182355.png>)
 
-### 8. 制图与定位
+#### 8. 制图与定位
 
-#### 8.1 SLAM - Simultaneous Localization and Mapping
+##### 8.1 SLAM - Simultaneous Localization and Mapping
 
 **slam_toolbox**：二维同时定位与地图构建工具包
 
 **AMCL**：自适应蒙特卡洛定位工具包
 
-#### 8.2 二维代价地图
+##### 8.2 二维代价地图
 
 **Costmap 2D 软件包**：生成全局和局部代价地图，用于路径规划和碰撞检测。
 
-#### 8.3 运行验证
+##### 8.3 运行验证
 
 **步骤 1：启动机器人描述节点**
 
@@ -164,7 +160,7 @@ sudo apt install ros-<ros2-distro>-nav2-bringup
 ros2 launch nav2_bringup navigation_launch.py use_sim_time:=true
 ```
 
-#### 8.4 代价地图可视化
+##### 8.4 代价地图可视化
 
 **全局代价地图（Global Costmap）：** 基于全局地图的成本栅格
 ![alt text](<img/屏幕截图 2026-02-04 165154.png>)
@@ -179,7 +175,7 @@ ros2 run nav2_costmap_2d nav2_costmap_2d_markers voxel_grid:=/local_costmap/voxe
 在 RViz 中查看标记：`Add → /mymarker topic → Marker`
 ![alt text](img/83627cb4-9c3a-491e-b83c-3908cdb6521c-22676279.png)
 
-### 9. 建立 Footprint（机器人占地面积）
+#### 9. 建立 Footprint（机器人占地面积）
 
 机器人的占地面积定义用于碰撞检测和代价地图膨胀。
 
@@ -221,11 +217,11 @@ ros2 launch nav2_bringup navigation_launch.py params_file:=<full/path/to/config/
 在 RViz 中：`Add → GlobalCostmap → Add`，固定坐标系为 `map`，应看到机器人的圆形轮廓
 ![alt text](img/22676279_9053592b-a9e6-44a2-d7ef-34efb3089dfd.png)
 ![alt text](<img/屏幕截图 2026-02-05 094839.png>)
-### 10. 设置导航插件
+#### 10. 设置导航插件
 
 Nav2 支持多种规划器、控制器和行为树插件，可根据需求配置。
 
-### 11. 设置生命周期和组合节点
+#### 11. 设置生命周期和组合节点
 
 生命周期管理允许节点在不同的生命周期状态间转换（unconfigured → inactive → active → finalize）。
 
