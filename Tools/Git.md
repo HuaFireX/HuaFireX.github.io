@@ -2,7 +2,7 @@
 
 ## 结构图
 
-![Git 结构图](https://api2.mubu.com/v3/document_image/dd23f680-2f62-4027-bab5-9001b7716608-22676279.jpg)
+![alt text](img/dd23f680-2f62-4027-bab5-9001b7716608-22676279.jpg)
 
 ## 常用命令
 
