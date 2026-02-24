@@ -1,8 +1,12 @@
 # Git教程
 
+---
+
 ## 结构图
 
 ![git](D:\main_ws\Learn_docs_ws\Tools\img\git.jpg)
+
+---
 
 ## 常用命令
 
@@ -58,12 +62,18 @@
 
 #### 其他常用命令
 - `git checkout` - 切换分支
+
 - `git mv <旧> <新>` - **移动**或**重命名**文件
+
 - `git log --all --pretty=oneline --abbrev-commit --graph` - 图形化**分支结构**
+
 - `git status` - 查询当前状态
+
 - `git branch -vv` - 查看分支链接关系
 
-## 初始化仓库
+---
+
+## 初建仓库
 
 ### 从零开始创建仓库
 
@@ -108,12 +118,99 @@ git branch --set-upstream-to=origin/<远程分支> <本地分支>
 echo "*.pkl" >> .gitignore
 ```
 
+好的！已将你提供的《接手项目 + 协作开发》流程整合进 `Git.md` 文档，保持原有风格，语言简洁、操作性强。以下是可直接追加到你 `Git.md` 文件末尾的内容：
+
+---
+
+## 接手项目与协作开发
+
+### 一、接手项目（7 步上手）
+
+1. **获取权限**  
+   确认仓库地址（HTTPS/SSH），确保已被加入项目成员。
+
+2. **克隆仓库**  
+   
+   - **推荐 SSH**：配置公钥后直接克隆  
+   
+   ```bash
+   git clone git@codeup.aliyun.com:xxx/project.git
+   ```
+   
+   - **HTTPS 备用**：用户名 = 阿里云账号 ID，密码 = 访问令牌（在 Codeup「克隆」页获取）
+   
+3. **查看远程分支**  
+   ```bash
+   git branch -r
+   ```
+
+4. **切换主干分支**（如 `develop`）  
+   ```bash
+   git checkout develop    # 自动创建并跟踪
+   git pull
+   ```
+
+5. **安装依赖 & 启动**  
+   按 `README.md` 执行（如 `npm install && npm run dev`）
+
+6. **配置本地环境**  
+   复制 `.env.example` → `.env`，填测试配置；**勿提交敏感文件**
+
+7. **创建功能分支**  
+   ```bash
+   git checkout -b feat/your-feature
+   ```
+
+> ⚠️ 注意：不在 `master`/`main` 上直接开发！
+
+---
+
+### 二、合作开发（6 步）
+
+1. **每日同步主干**  
+   ```bash
+   git checkout develop && git pull origin develop
+   ```
+
+2. **从主干拉新分支**  
+   ```bash
+   git checkout -b feat/xxx
+   ```
+
+3. **小步提交，规范注释**  
+   ```bash
+   git commit -m "feat(auth): add login API"
+   ```
+
+4. **推送并提 MR/PR**  
+   ```bash
+   git push origin feat/xxx
+   ```
+   
+5. **响应 Code Review**  
+   修改后继续 `git push` 到同一分支，MR 自动更新
+
+6. **合并后清理**  
+   - 线上勾选 **Delete source branch**
+   - 本地删除：
+     ```bash
+     git checkout develop
+     git pull
+     git branch -d feat/xxx
+     ```
+
+> ✅ 原则：小 MR、必 Review、主干可发布、冲突自解
+>
+> ---
+
 ## 认证信息
 
 **Gitee** - 用户名：`Y_H_U_A`  
 **GitHub** - 用户名：`HuaFireX`
 
-## 高级用法
+---
+
+## 其他
 
 ### 大文件处理（LFS）
 
