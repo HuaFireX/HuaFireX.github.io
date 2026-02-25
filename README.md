@@ -1,51 +1,21 @@
-<!-- 主标题 -->
-<div align="center">
+# 学习笔记
 
-# 📚 学习资源库
+记录学习过程中的笔记与总结。
 
-> 整合技术笔记与学习资源的知识库
+## 目录
 
-</div>
+### [ROS2](/ROS2/sub_index)
+机器人操作系统
 
----
+- [Navigation2](/ROS2/Navigation2)
 
-## ✨ 快速导航
+### [Tools](/Tools/sub_index)
+开发工具
 
-<div align="center">
-
-| 🤖 | 🛠️ |
-|:---:|:---:|
-| **[ROS2 学习](/ROS2/sub_index)** | **[开发工具](/Tools/sub_index)** |
-| 机器人操作系统 | 版本控制与工具 |
-
-</div>
+- [Git](/Tools/Git)
+- [GitHub Pages](/Tools/Github_pages)
+- [GitHub Actions](/Tools/Github_actions)
 
 ---
 
-## 📖 资源分类
-
-### 🤖 ROS2 生态
-深入学习机器人操作系统的核心概念与实践应用
-
-- **[Navigation 2 (Nav2)](/ROS2/Navigation2)** · ROS2 导航栈完整指南
-  - 自主导航 · 路径规划 · 环境感知
-
-### 🛠️ 开发工具  
-掌握高效的开发工具与最佳实践
-
-- **[Git 版本控制](/Tools/Git)** · 完整的 Git 使用手册
-  - 基础命令 · 分支管理 · 错误排查 · LFS 大文件处理
-
----
-
-## 🚀 开始探索
-
-选择上方导航栏中的内容开始学习，或使用左侧菜单快速导航。
-
-<div align="center">
-
----
-
-**最后更新** · Feb 12, 2026
-
-</div>
+更新于 2026-02

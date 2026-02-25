@@ -4,7 +4,7 @@
 
 ## 结构图
 
-![git](D:\main_ws\Learn_docs_ws\Tools\img\git.jpg)
+![git](img\git.jpg)
 
 ---
 

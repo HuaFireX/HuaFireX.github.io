@@ -13,6 +13,27 @@
     <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
     <!-- 默认主题 -->
     <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/docsify/lib/themes/vue.css">
+    <style>
+        /* 侧边栏标题样式增强 */
+        .sidebar-nav > ul > li > a {
+            font-weight: 600;
+            font-size: 1.1em;
+            color: #333;
+        }
+        .sidebar-nav > ul > li > ul > li > a {
+            font-weight: 500;
+            color: #555;
+        }
+        .sidebar-nav > ul > li > ul > li > ul > li > a {
+            font-weight: 400;
+            color: #666;
+            font-size: 0.9em;
+        }
+        /* 侧边栏层级缩进 */
+        .sidebar-nav > ul > li > a { padding-left: 15px; }
+        .sidebar-nav > ul > li > ul > li > a { padding-left: 30px; }
+        .sidebar-nav > ul > li > ul > li > ul > li > a { padding-left: 45px; }
+    </style>
 </head>
 
 <body>
@@ -23,10 +44,10 @@
             // 项目名称
             //name: '学习',
             // 仓库地址，点击右上角的Github章鱼猫头像会跳转到此地址
-            //repo: ,
+            repo: 'HuaFireX/HuaFireX.github.io',
             // 侧边栏支持，默认加载的是项目根目录下的_sidebar.md文件
             loadSidebar: true,
-            sidebarDisplayLevel: 1,
+            sidebarDisplayLevel: 2,
             alias: {
             '/.*/_sidebar.md': '/_sidebar.md'
             },
