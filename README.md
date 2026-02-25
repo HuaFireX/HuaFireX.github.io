@@ -7,6 +7,7 @@
 ### [ROS2](/ROS2/sub_index)
 机器人操作系统
 
+- [ROS2 快速入门](/ROS2/ROS2_quick_start)
 - [Navigation2](/ROS2/Navigation2)
 
 ### [Tools](/Tools/sub_index)
