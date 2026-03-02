@@ -1,5 +1,5 @@
 # Navigation 2入门
-
+---
 ## 安装与运行示例（以 ROS2 发行版 `humble` 为例）
 
 ### 安装
@@ -25,6 +25,8 @@ ros2 launch nav2_bringup tb3_simulation_launch.py headless:=False
 
 > 注意：`headless` 默认是 `true`，如需使用 `gzclient` 请设置为 `False`（或 `headless:=False`）。
 
+---
+
 ## 导航相关概念
 
 - TF / TF2
@@ -32,6 +34,8 @@ ros2 launch nav2_bringup tb3_simulation_launch.py headless:=False
 - Gazebo（3D 仿真）
 - URDF（机器人描述）
 - SDF（Gazebo 使用的机器人/场景描述）
+
+---
 
 ## 首次机器人配置指南
 
@@ -76,14 +80,6 @@ SDF 是 Gazebo 仿真环境中使用的机器人/环境描述格式。
 sudo apt install ros-<ros2-distro>-sdformat-urdf
 ```
 
-#### 5. 设置里程计 - Odometry（Gazebo 仿真）
-
-**安装 3D 模拟器 Gazebo：**
-
-```bash
-sudo apt install ros-<ros2-distro>-ros-gz
-```
-
 #### 6. 实现里程平滑化 - 拓展卡尔曼滤波融合
 
 使用 robot_localization 包融合多个传感器（里程计、IMU 等）以获得平滑的位姿估计。
@@ -106,6 +102,7 @@ ekf.yaml 包含 EKF 节点的参数配置，定义输入话题、融合的传感
 
 ![alt text](<img/屏幕截图 2026-02-03 181816.png>)
 ![alt text](<img/屏幕截图 2026-02-03 182355.png>)
+```
 
 #### 8. 制图与定位
 
@@ -164,8 +161,10 @@ ros2 launch nav2_bringup navigation_launch.py use_sim_time:=true
 
 **全局代价地图（Global Costmap）：** 基于全局地图的成本栅格
 ![alt text](<img/屏幕截图 2026-02-04 165154.png>)
+
 **局部代价地图（Local Costmap）：** 基于机器人周围传感器数据的成本栅格
 ![alt text](<img/屏幕截图 2026-02-04 165047.png>)
+
 **可视化体素表示：**
 
 ```bash
@@ -173,7 +172,9 @@ ros2 run nav2_costmap_2d nav2_costmap_2d_markers voxel_grid:=/local_costmap/voxe
 ```
 
 在 RViz 中查看标记：`Add → /mymarker topic → Marker`
+
 ![alt text](img/83627cb4-9c3a-491e-b83c-3908cdb6521c-22676279.png)
+```
 
 #### 9. 建立 Footprint（机器人占地面积）
 
@@ -196,6 +197,7 @@ ros2 run tf2_ros static_transform_publisher 0 0 0 0 0 0 map odom
 ```
 
 **步骤 3：启动 Nav2 导航**
+
 ![alt text](<img/屏幕截图 2026-02-05 094221.png>)
 
 ```bash
@@ -210,13 +212,17 @@ ros2 launch nav2_bringup navigation_launch.py params_file:=<full/path/to/config/
 **步骤 4：可视化局部代价地图**
 
 在 RViz 中：`Add → LocalCostmap → Add`，固定坐标系为 `odom`，应看到机器人的矩形足迹
+
 ![alt text](img/22676279_cbbf8dc2-594e-4c07-e8ca-546b3609f63e.png)
 ![alt text](<img/屏幕截图 2026-02-05 094727.png>)
+
 **步骤 5：可视化全局代价地图**
 
 在 RViz 中：`Add → GlobalCostmap → Add`，固定坐标系为 `map`，应看到机器人的圆形轮廓
+
 ![alt text](img/22676279_9053592b-a9e6-44a2-d7ef-34efb3089dfd.png)
 ![alt text](<img/屏幕截图 2026-02-05 094839.png>)
+
 #### 10. 设置导航插件
 
 Nav2 支持多种规划器、控制器和行为树插件，可根据需求配置。
@@ -226,6 +232,8 @@ Nav2 支持多种规划器、控制器和行为树插件，可根据需求配置
 生命周期管理允许节点在不同的生命周期状态间转换（unconfigured → inactive → active → finalize）。
 
 组合节点将多个功能整合为单个节点，便于管理复杂的系统。
+
+---
 
 ## fishbot 配置
 
@@ -240,7 +248,9 @@ ros2 run teleop_twist_keyboard teleop_twist_keyboard
 ```
 
 - 使用 `rqt` 显示速度（Plugin → Visualization → Plot）
+
 ![alt text](img/22676279_c8b5e53c-4241-4926-cfce-25d3e179f8b8.png)
+```
 
 ## 导航实战
 
@@ -254,6 +264,9 @@ cd ~/.gazebo && wget https://gitee.com/ohhuo/scripts/raw/master/gazebo_model.py 
 
 启动时加载世界模型和机器人模型。
 ![alt text](<img/屏幕截图 2026-02-06 173823.png>)
+
+---
+
 ## SLAM 建图
 
 ### Cartographer
@@ -314,6 +327,7 @@ ros2 pkg list | grep cartographer
 ##### 基本介绍
 
 Cartographer 的参数配置主要通过 `.lua` 配置文件进行。关键参数包括：
+
 ![alt text](<img/屏幕截图 2026-02-09 101236.png>)
 ![alt text](<img/屏幕截图 2026-02-09 101412.png>)
 ![alt text](<img/屏幕截图 2026-02-09 101601.png>)
@@ -361,6 +375,7 @@ sudo apt install -y gimp language-pack-gnome-zh-hant language-pack-gnome-zh-hans
 ##### 3. 修改配置文件
 
 在 map 路径下创建对应的 YAML 配置文件 `fishbot_map.yaml`：
+
 ![alt text](<img/屏幕截图 2026-02-09 144953.png>)
 > **参数说明：**
 > - `image`：地图图像文件名
@@ -422,6 +437,8 @@ ros2 topic list | grep map
 | RViz 无显示 | 检查坐标系设置，确保 TF 变换正确 |
 | 分辨率不对 | 调整 YAML 中的 `resolution` 参数以匹配建图时的设置 |
 
+---
+
 ## Nav2 导航
 
 APT 安装示例：
@@ -437,6 +454,7 @@ ros2 pkg list | grep navigation2
 ```
 
 源码功能包拆解列表：
+
 ![alt text](<img/屏幕截图 2026-02-09 145539.png>)
 ![alt text](<img/屏幕截图 2026-02-09 145549.png>)
 
@@ -448,9 +466,13 @@ ros2 pkg create fishbot_navigation2 --dependencies nav2_bringup
 ![alt text](<img/屏幕截图 2026-02-09 154249.png>)
 ![alt text](img/22676279_b8beb026-f7bc-4d56-b1e1-3d68fd752fb6.gif)
 
+---
+
 ## 运行官方示例
 
 - 运行 `nav_to_pose_example_launch.py` 等教程示例。
+
+---
 
 ## 常用节点
 
@@ -459,6 +481,8 @@ ros2 pkg create fishbot_navigation2 --dependencies nav2_bringup
 ```bash
 ros2 run teleop_twist_keyboard teleop_twist_keyboard
 ```
+
+---
 
 ## 杂项
 
@@ -481,6 +505,8 @@ wsl --shutdown
 # 然后重启 WSL
 ```
 
+---
+
 ## 参考
 
 - navigation2_tutorials 示例：
@@ -495,5 +521,3 @@ wsl --shutdown
 	- https://docs.ros.org/en/humble/Tutorials/Intermediate/URDF/Building-a-Visual-Robot-Model-with-URDF-from-Scratch.html
 
 ---
-
-*笔记由导出的 HTML 转换并整理，若需调整标题层级或把部分内容拆分为子页面，请告诉我。*

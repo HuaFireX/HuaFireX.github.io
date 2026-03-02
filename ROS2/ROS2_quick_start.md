@@ -567,6 +567,25 @@ ros2 bag           # 录制回放
 
 ---
 
+## ROS1 与 ROS2 区别
+
+如果之前有 ROS1 基础，以下是主要区别：
+
+| 对比项 | ROS1 | ROS2 |
+|--------|------|------|
+| 启动命令 | 需要 `roscore` | 无需 `roscore`，DDS 自动发现 |
+| 通信中间件 | ROS Master | DDS（去中心化） |
+| 工作空间编译 | `catkin_make` | `colcon build` |
+| 功能包创建 | `catkin_create_pkg` | `ros2 pkg create` |
+| 节点启动 | `rosrun` | `ros2 run` |
+| 话题列出 | `rostopic list` | `ros2 topic list` |
+| 参数存储 | ROS Master | 节点内部 |
+| Launch 文件 | XML | Python |
+
+详细区别请参考：[ROS1 与 ROS2 区别](/ROS2/ROS1_vs_ROS2)
+
+---
+
 ## 下一步
 
 - [Navigation2](/ROS2/Navigation2) - 真实机器人导航
