@@ -1,5 +1,7 @@
 # Navigation 2入门
+
 ---
+
 ## 安装与运行示例（以 ROS2 发行版 `humble` 为例）
 
 ### 安装
@@ -24,6 +26,8 @@ ros2 launch nav2_bringup tb3_simulation_launch.py headless:=False
 ```
 
 > 注意：`headless` 默认是 `true`，如需使用 `gzclient` 请设置为 `False`（或 `headless:=False`）。
+>
+> 补充：`source /usr/share/gazebo/setup.sh	#分步运行时，gazebo仿真相机加载失败可能用得到`
 
 ---
 
@@ -97,11 +101,13 @@ ekf.yaml 包含 EKF 节点的参数配置，定义输入话题、融合的传感
 #### 7. 设置传感器 - Sensors（Gazebo 仿真）
 
 在 Gazebo 中配置机器人传感器：
+
 - **雷达（LiDAR）**：生成环境的点云数据
 - **相机**：RGB 或深度相机用于视觉导航
 
-![alt text](<img/屏幕截图 2026-02-03 181816.png>)
-![alt text](<img/屏幕截图 2026-02-03 182355.png>)
+![alt text](img/屏幕截图 2026-02-03 181816.png)
+![alt text](img/屏幕截图 2026-02-03 182355.png)
+
 ```
 
 #### 8. 制图与定位
@@ -137,7 +143,7 @@ ros2 launch slam_toolbox online_async_launch.py use_sim_time:=true
 ```
 
 在 RViz 中查看地图：`Add → Topic → map`
-![alt text](<img/屏幕截图 2026-02-04 163352.png>)
+![alt text](img/屏幕截图 2026-02-04 163352.png)
 **步骤 3：创建变换树（frame 关系图）**
 
 ```bash
@@ -160,10 +166,10 @@ ros2 launch nav2_bringup navigation_launch.py use_sim_time:=true
 ##### 8.4 代价地图可视化
 
 **全局代价地图（Global Costmap）：** 基于全局地图的成本栅格
-![alt text](<img/屏幕截图 2026-02-04 165154.png>)
+![alt text](img/屏幕截图 2026-02-04 165154.png)
 
 **局部代价地图（Local Costmap）：** 基于机器人周围传感器数据的成本栅格
-![alt text](<img/屏幕截图 2026-02-04 165047.png>)
+![alt text](img/屏幕截图 2026-02-04 165047.png)
 
 **可视化体素表示：**
 
@@ -174,6 +180,7 @@ ros2 run nav2_costmap_2d nav2_costmap_2d_markers voxel_grid:=/local_costmap/voxe
 在 RViz 中查看标记：`Add → /mymarker topic → Marker`
 
 ![alt text](img/83627cb4-9c3a-491e-b83c-3908cdb6521c-22676279.png)
+
 ```
 
 #### 9. 建立 Footprint（机器人占地面积）
@@ -198,7 +205,7 @@ ros2 run tf2_ros static_transform_publisher 0 0 0 0 0 0 map odom
 
 **步骤 3：启动 Nav2 导航**
 
-![alt text](<img/屏幕截图 2026-02-05 094221.png>)
+![alt text](img/屏幕截图 2026-02-05 094221.png)
 
 ```bash
 # 终端 3
@@ -214,14 +221,14 @@ ros2 launch nav2_bringup navigation_launch.py params_file:=<full/path/to/config/
 在 RViz 中：`Add → LocalCostmap → Add`，固定坐标系为 `odom`，应看到机器人的矩形足迹
 
 ![alt text](img/22676279_cbbf8dc2-594e-4c07-e8ca-546b3609f63e.png)
-![alt text](<img/屏幕截图 2026-02-05 094727.png>)
+![alt text](img/屏幕截图 2026-02-05 094727.png)
 
 **步骤 5：可视化全局代价地图**
 
 在 RViz 中：`Add → GlobalCostmap → Add`，固定坐标系为 `map`，应看到机器人的圆形轮廓
 
 ![alt text](img/22676279_9053592b-a9e6-44a2-d7ef-34efb3089dfd.png)
-![alt text](<img/屏幕截图 2026-02-05 094839.png>)
+![alt text](img/屏幕截图 2026-02-05 094839.png)
 
 #### 10. 设置导航插件
 
@@ -238,8 +245,7 @@ Nav2 支持多种规划器、控制器和行为树插件，可根据需求配置
 ## fishbot 配置
 
 - 两轮差速控制插件示例：
-![alt text](<img/屏幕截图 2026-02-06 170840.png>)
-
+  ![alt text](img/屏幕截图 2026-02-06 170840.png)
 - 键盘控制：
 
 ```bash
@@ -250,6 +256,7 @@ ros2 run teleop_twist_keyboard teleop_twist_keyboard
 - 使用 `rqt` 显示速度（Plugin → Visualization → Plot）
 
 ![alt text](img/22676279_c8b5e53c-4241-4926-cfce-25d3e179f8b8.png)
+
 ```
 
 ## 导航实战
@@ -263,7 +270,7 @@ cd ~/.gazebo && wget https://gitee.com/ohhuo/scripts/raw/master/gazebo_model.py 
 ```
 
 启动时加载世界模型和机器人模型。
-![alt text](<img/屏幕截图 2026-02-06 173823.png>)
+![alt text](img/屏幕截图 2026-02-06 173823.png)
 
 ---
 
@@ -328,10 +335,10 @@ ros2 pkg list | grep cartographer
 
 Cartographer 的参数配置主要通过 `.lua` 配置文件进行。关键参数包括：
 
-![alt text](<img/屏幕截图 2026-02-09 101236.png>)
-![alt text](<img/屏幕截图 2026-02-09 101412.png>)
-![alt text](<img/屏幕截图 2026-02-09 101601.png>)
-![alt text](<img/屏幕截图 2026-02-09 101644.png>)
+![alt text](img/屏幕截图 2026-02-09 101236.png)
+![alt text](img/屏幕截图 2026-02-09 101412.png)
+![alt text](img/屏幕截图 2026-02-09 101601.png)
+![alt text](img/屏幕截图 2026-02-09 101644.png)
 
 #### 配置 fishbot 进行建图
 
@@ -351,7 +358,9 @@ ros2 launch fishbot_simulation ... (根据实际启动文件)
 # 终端 2：启动 Cartographer
 ros2 launch cartographer_ros carto_cartographer.launch.py
 ```
-![alt text](<img/屏幕截图 2026-02-09 144536.png>)
+
+![alt text](img/屏幕截图 2026-02-09 144536.png)
+
 #### 地图加载与编辑
 
 ##### 1. 下载和安装 GIMP
@@ -368,6 +377,7 @@ sudo apt install -y gimp language-pack-gnome-zh-hant language-pack-gnome-zh-hans
 - 完成编辑后导出为 **PNG 格式** 到 map 路径下
 
 **导出设置：**
+
 - 格式：PNG
 - 保存路径：通常为 ROS 工作空间下的 `maps/` 目录
 - 文件名例：`fishbot_map.png`
@@ -376,8 +386,10 @@ sudo apt install -y gimp language-pack-gnome-zh-hant language-pack-gnome-zh-hans
 
 在 map 路径下创建对应的 YAML 配置文件 `fishbot_map.yaml`：
 
-![alt text](<img/屏幕截图 2026-02-09 144953.png>)
+![alt text](img/屏幕截图 2026-02-09 144953.png)
+
 > **参数说明：**
+>
 > - `image`：地图图像文件名
 > - `resolution`：地图分辨率（米/像素）
 > - `origin`：地图原点在世界坐标系中的位置 [x, y, theta]
@@ -398,6 +410,7 @@ rviz2
 ```
 
 配置 RViz：
+
 - 添加 Map 话题（Topic → map）
 - 设置固定坐标系为 map
 
@@ -409,13 +422,14 @@ ros2 lifecycle set /map_server activate
 ```
 
 > **生命周期说明：**
+>
 > - `configure`：配置节点，加载地图文件
 > - `activate`：激活节点，开始发布地图
 
 ##### 5. 验证结果
 
 - 在 RViz2 中应看到加载的地图显示
-![alt text](<img/屏幕截图 2026-02-09 145028.png>)
+  ![alt text](img/屏幕截图 2026-02-09 145028.png)
 - 如有多个终端，需检查话题连接是否正常
 
 ```bash
@@ -423,6 +437,7 @@ ros2 topic list | grep map
 ```
 
 应输出类似：
+
 ```bash
 /map
 /map_metadata
@@ -430,12 +445,12 @@ ros2 topic list | grep map
 
 **常见问题排查：**
 
-| 问题 | 解决方案 |
-|------|--------|
-| 地图加载失败 | 检查 YAML 文件路径和 PNG 图像文件是否存在 |
-| 话题无数据 | 确保 map_server 已激活（lifecycle set activate） |
-| RViz 无显示 | 检查坐标系设置，确保 TF 变换正确 |
-| 分辨率不对 | 调整 YAML 中的 `resolution` 参数以匹配建图时的设置 |
+| 问题         | 解决方案                                             |
+| ------------ | ---------------------------------------------------- |
+| 地图加载失败 | 检查 YAML 文件路径和 PNG 图像文件是否存在            |
+| 话题无数据   | 确保 map_server 已激活（lifecycle set activate）     |
+| RViz 无显示  | 检查坐标系设置，确保 TF 变换正确                     |
+| 分辨率不对   | 调整 YAML 中的 `resolution` 参数以匹配建图时的设置 |
 
 ---
 
@@ -455,15 +470,16 @@ ros2 pkg list | grep navigation2
 
 源码功能包拆解列表：
 
-![alt text](<img/屏幕截图 2026-02-09 145539.png>)
-![alt text](<img/屏幕截图 2026-02-09 145549.png>)
+![alt text](img/屏幕截图 2026-02-09 145539.png)
+![alt text](img/屏幕截图 2026-02-09 145549.png)
 
 为 fishbot 配置 Nav2 示例：
 
 ```bash
 ros2 pkg create fishbot_navigation2 --dependencies nav2_bringup
 ```
-![alt text](<img/屏幕截图 2026-02-09 154249.png>)
+
+![alt text](img/屏幕截图 2026-02-09 154249.png)
 ![alt text](img/22676279_b8beb026-f7bc-4d56-b1e1-3d68fd752fb6.gif)
 
 ---
@@ -510,14 +526,14 @@ wsl --shutdown
 ## 参考
 
 - navigation2_tutorials 示例：
-	- https://github.com/ros-planning/navigation2_tutorials/tree/master/sam_bot_description
+  - https://github.com/ros-planning/navigation2_tutorials/tree/master/sam_bot_description
 - FishROS 教程（humble）：
-	- https://fishros.com/d2lros2/#/humble
+  - https://fishros.com/d2lros2/#/humble
 - FishROS Nav2 中文文档：
-	- http://dev.nav2.fishros.com
+  - http://dev.nav2.fishros.com
 - Nav2 官方文档：
-	- https://docs.nav2.org/
+  - https://docs.nav2.org/
 - ROS 2 URDF 指南：
-	- https://docs.ros.org/en/humble/Tutorials/Intermediate/URDF/Building-a-Visual-Robot-Model-with-URDF-from-Scratch.html
+  - https://docs.ros.org/en/humble/Tutorials/Intermediate/URDF/Building-a-Visual-Robot-Model-with-URDF-from-Scratch.html
 
 ---
