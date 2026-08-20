@@ -33,8 +33,9 @@
 #### 提交修改
 `git commit` - **提交**请求命令
 
-- `git commit -m "提交信息"` - 填写提交信息
+- `git commit -m "提交信息"` - 提交并附上提交信息
 - `git commit -a` - 将被修改的文件暂存并提交
+- `git commit --amend -m "新提交信息"` - 重新提交并覆盖上一次的提交信息
 
 #### 远程仓库
 `git remote` - **远程仓库**命令
@@ -167,7 +168,8 @@ echo "*.pkl" >> .gitignore
 
 ### 二、合作开发（6 步）
 
-1. **每日同步主干**  
+1. **每日同步主干**
+
    ```bash
    git checkout develop && git pull origin develop
    ```
@@ -190,7 +192,8 @@ echo "*.pkl" >> .gitignore
 5. **响应 Code Review**  
    修改后继续 `git push` 到同一分支，MR 自动更新
 
-6. **合并后清理**  
+6. **合并后清理**
+
    - 线上勾选 **Delete source branch**
    - 本地删除：
      ```bash
@@ -199,9 +202,49 @@ echo "*.pkl" >> .gitignore
      git branch -d feat/xxx
      ```
 
-> ✅ 原则：小 MR、必 Review、主干可发布、冲突自解
->
-> ---
+✅ 原则：小 MR、必 Review、主干可发布、冲突自解
+
+#### RCS协作开发模式：
+
+fetch + reset 代替 pull：
+
+- 避免意外产生 merge commit
+
+- 确保本地主干与远程完全一致
+
+- 更适合集成分支（如 RCS-develop）
+
+当 RCS-develop 分支已合并了RCS-develop-yh和其他的分支成为了远程仓库最新的分支时，进行下面的操作：
+
+```bash
+# 1. 获取所有远程最新引用（关键！）
+git fetch origin
+
+# 2. 切换到主干并同步（基于最新远程状态）
+git checkout RCS-develop
+git reset --hard origin/RCS-develop   # 确保本地与远程完全一致
+
+# 3. 切换到你的个人分支
+git checkout RCS-develop-yh
+
+# 4. 将你的提交 rebase 到最新主干上
+git rebase RCS-develop
+
+# >> 如果 rebase 出现冲突
+
+# 1. 手动解决冲突文件（编辑器中处理 <<<<<<< ===== >>>>>>>）
+# 2. 标记冲突已解决
+git add <resolved-file>
+# 3. 继续 rebase
+git rebase --continue
+# （如需中止）→ git rebase --abort
+
+# >> 同步后继续开发
+git push --force-with-lease
+# --force-with-lease 安全：仅当远程未被他人更新时才允许覆盖
+```
+
+---
 
 ## 认证信息
 
