@@ -12,6 +12,8 @@ ROS2（Robot Operating System 2）是机器人操作系统的第二代版本，�
 
 ## 导航仿真
 
+[VDA5050 RCS5.0 Adapter](/ROS2/VDA5050_RCS5.0_adapter) - VDA5050 协议与 RCS5.0 对接适配器
+
 [VDA5050 tb3 Nav2](/ROS2/VDA5050_tb3_Nav2) - Nav2 + TurtleBot3 + VDA5050 仿真完整流程
 
 [Navigation 2 (Nav2)](/ROS2/Navigation2) - ROS2导航栈，用于自主移动机器人的导航
