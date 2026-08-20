@@ -5,3 +5,7 @@
 ## ESP32-S3
 
 [ESP32-S3 + MimicLaw 快速入门](/MCU开发/ESP32S3_mimiclaw_quick_start) - 快速部署指南
+
+## FreeRTOS
+
+[FreeRTOS 教程](/MCU开发/freeRTOS_tutorial) - 实时操作系统入门
